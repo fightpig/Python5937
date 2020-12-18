@@ -23,8 +23,25 @@ def add(x, y):
     return x + y
 
 
+def add_3(x, y, z):
+    print(x, y, z)
+    return x + y + z
+
+
 # 固定让10首发
 add_10 = functools.partial(add, 10)
+
+
+def my_partial(func, *args1):
+    def wrapper(*args2):
+        return func(*(args1 + args2))
+
+    return wrapper
+
+
+add_100 = my_partial(add, 100)
+add_1_2 = my_partial(add_3, 1, 2)
+add_1 = my_partial(add_3, 1)
 
 
 class Stu:
@@ -42,6 +59,10 @@ class Stu:
 
 
 if __name__ == '__main__':
-    print(add_10(5))
-    s = Stu.get_default_instance(5)
-    print(s.a, s.b, s.c, s.d, s.e)
+    # print(add_10(5))
+    # s = Stu.get_default_instance(5)
+    # print(s.a, s.b, s.c, s.d, s.e)
+    #
+    # print(add_100(9))
+    print(add_1_2(3))
+    print(add_1(2, 3))
